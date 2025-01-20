@@ -39,7 +39,7 @@ const App = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.post('http://localhost:3001/api/faucet', {
+      const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet', {
         address,
         tokenType: selectedToken
       });
