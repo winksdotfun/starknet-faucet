@@ -43,8 +43,8 @@ const App = () => {
         address,
         tokenType: selectedToken
       });
-      
-      setSuccess('Tokens requested successfully!');
+
+      setSuccess('Tokens sent successfully!');
       setRecentlyRequested(true); // Set to true after successful request
       console.log('Faucet response:', response.data);
     } catch (error) {
@@ -144,12 +144,12 @@ const App = () => {
 
           {/* Status Messages */}
           {error && (
-            <div className="mb-2 text-xs text-[#E6778B] bg-[#E6778B]/10 rounded-xl p-3">
+            <div className="mb-2 text-xs text-[#E6778B] bg-[#E6778B]/10 rounded-xl p-3 text-center">
               {error}
             </div>
           )}
           {success && (
-            <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3">
+            <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3 text-center">
               {success}
             </div>
           )}
