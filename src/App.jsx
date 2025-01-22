@@ -8,6 +8,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [transactionHash, setTransactionHash] = useState(null);
   const [recentlyRequested, setRecentlyRequested] = useState(false);
 
   const validateStarknetAddress = (addr) => {
@@ -40,13 +41,17 @@ const App = () => {
 
     try {
       const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet', {
+      // const response = await axios.post('http://localhost:3001/api/faucet', {
+      
         address,
         tokenType: selectedToken
       });
 
       setSuccess('Tokens sent successfully!');
-      setRecentlyRequested(true); // Set to true after successful request
+      setTransactionHash(response.data.transactionHash);
+      setRecentlyRequested(true); 
       console.log('Faucet response:', response.data);
+      console.log('Faucet response:', response.data.transactionHash);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 429) {
@@ -149,8 +154,9 @@ const App = () => {
             </div>
           )}
           {success && (
-            <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3 text-center">
-              {success}
+            <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3 text-center w-full truncate ">
+              {success} <br />
+              {transactionHash}
             </div>
           )}
 
