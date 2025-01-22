@@ -82,7 +82,7 @@ const App = () => {
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
           <h1 className="text-2xl font-bold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#E6778B] to-[#FAFAFA]">
-            Starknet Faucet
+            Monad Faucet
           </h1>
           <p className="text-[#FAFAFA]/70">
             Get testnet tokens for your Starknet journey
