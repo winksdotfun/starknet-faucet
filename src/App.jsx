@@ -41,8 +41,6 @@ const App = () => {
 
     try {
       const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet', {
-      // const response = await axios.post('http://localhost:3001/api/faucet', {
-      
         address,
         tokenType: selectedToken
       });
@@ -78,21 +76,21 @@ const App = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-b from-[#0C0C4F] to-[#0C0C4F]/90 text-[#FAFAFA] font-mono">
+    <div className="flex justify-center items-center min-h-screen bg-[#f6f3f1] text-[#0f1324] font-mono">
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
-          <h1 className="text-2xl font-bold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#E6778B] to-[#FAFAFA]">
+          <h1 className="text-2xl font-bold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#6e54ff] to-[#fbfaf9]">
             Monad Faucet
           </h1>
-          <p className="text-[#FAFAFA]/70">
-            Get testnet tokens for your Starknet journey
+          <p className="text-[#0f1324]/70">
+            Get testnet tokens for your monad journey
           </p>
         </div>
 
-        <div className="backdrop-blur-sm bg-[#FAFAFA]/5 rounded-2xl p-6 shadow-xl border border-[#FAFAFA]/10">
+        <div className="backdrop-blur-sm bg-[#fbfaf9]  rounded-2xl p-6 border border-black/10">
           {/* Address Input */}
           <div className="mb-2">
-            <label className="block text-sm font-medium mb-2 text-[#FAFAFA]">
+            <label className="block text-sm font-medium mb-2 text-[#0f1324]">
               Starknet Address
             </label>
             <input 
@@ -100,18 +98,18 @@ const App = () => {
               placeholder="0x..." 
               value={address}
               onChange={handleAddressChange}
-              className="w-full px-4 py-2 text-sm rounded-xl bg-[#FAFAFA]/10 border border-[#FAFAFA]/20 
-                       text-[#FAFAFA] placeholder-[#FAFAFA]/30 outline-none focus:border-[#E6778B] 
+              className="w-full px-4 py-2 text-sm rounded-xl bg-[#f6f3f1] border border-[#000000]/10 
+                       text-[#0f1324] placeholder-[#0f1324]/30 outline-none focus:border-[#6e54ff] 
                        transition-all duration-300"
             />
             {address && !isValidAddress && (
-              <p className="mt-2 text-sm text-[#E6778B]">Please enter a valid Starknet address</p>
+              <p className="mt-2 text-sm text-[#6e54ff]">Please enter a valid Monad address</p>
             )}
           </div>
 
           {/* Token Selection */}
           <div className="mb-3">
-            <label className="block text-sm font-medium mb-2 text-[#FAFAFA]">
+            <label className="block text-sm font-medium mb-2 text-[#0f1324]">
               Select Token
             </label>
             <div className="grid grid-cols-2 gap-4">
@@ -120,28 +118,28 @@ const App = () => {
                 disabled={recentlyRequested}
                 className={`px-4 py-2 text-base rounded-xl transition-all duration-300 
                   ${selectedToken === 'STRK' 
-                    ? 'bg-[#E6778B] text-[#FAFAFA] shadow-lg' 
-                    : 'bg-[#FAFAFA]/10 hover:bg-[#FAFAFA]/20 border border-[#FAFAFA]/20'
+                    ? 'bg-[#6e54ff] text-[#0f1324] shadow-lg' 
+                    : 'bg-[#f6f3f1]/10 hover:bg-[#f6f3f1]/90 border border-[#f6f3f1]/20'
                   } ${recentlyRequested ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                STRK
+                MONAD
               </button>
               <button 
                 onClick={() => setSelectedToken('ETH')}
                 disabled={recentlyRequested}
                 className={`px-4 py-2 text-base rounded-xl transition-all duration-300 
                   ${selectedToken === 'ETH' 
-                    ? 'bg-[#E6778B] text-[#FAFAFA] shadow-lg' 
-                    : 'bg-[#FAFAFA]/10 hover:bg-[#FAFAFA]/20 border border-[#FAFAFA]/20'
+                    ? 'bg-[#6e54ff] text-[#0f1324] shadow-lg' 
+                    : 'bg-[#f6f3f1] hover:bg-[#fbfaf9]/20 border border-[#f6f3f1]/20'
                   } ${recentlyRequested ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 ETH
               </button>
             </div>
 
-            <div className="mt-2 text-center text-sm text-[#FAFAFA]/70 bg-[#FAFAFA]/5 rounded-xl p-3">
+            <div className="mt-2 text-center text-sm text-[#0f1324]/70 bg-[#fbfaf9]/5 rounded-xl p-3">
               {selectedToken === 'STRK' 
-                ? "You can request 150 STRKs every 24 hours"
+                ? "You can request 150 monad every 24 hours"
                 : "You can request 0.002 ETH every 24 hours"
               }
             </div>
@@ -149,7 +147,7 @@ const App = () => {
 
           {/* Status Messages */}
           {error && (
-            <div className="mb-2 text-xs text-[#E6778B] bg-[#E6778B]/10 rounded-xl p-3 text-center">
+            <div className="mb-2 text-xs text-[#6e54ff] bg-[#6e54ff]/10 rounded-xl p-3 text-center">
               {error}
             </div>
           )}
@@ -166,8 +164,8 @@ const App = () => {
             disabled={!isValidAddress || loading || recentlyRequested}
             className={`w-full py-3 rounded-xl font-medium transition-all duration-300
               ${isValidAddress && !loading && !recentlyRequested
-                ? 'bg-gradient-to-r from-[#E6778B] to-[#E6778B]/80 hover:opacity-90 shadow-lg' 
-                : 'bg-[#FAFAFA]/10 text-[#FAFAFA]/40 cursor-not-allowed'
+                ? 'bg-gradient-to-r from-[#6e54ff] to-[#6e54ff]/80 text-[#fbfaf9] hover:opacity-90 shadow-lg' 
+                : 'bg-[#0f1324]/10 text-[#0f1324]/40 cursor-not-allowed'
               }`}
           >
             {loading ? 'Requesting...' : recentlyRequested ? 'Already Requested' : 'Request Tokens'}
@@ -175,7 +173,7 @@ const App = () => {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-3 text-sm text-[#FAFAFA]/50">
+        <div className="text-center mt-3 text-sm text-[#0f1324]/50">
           Powered by winks.fun
         </div>
       </div>
