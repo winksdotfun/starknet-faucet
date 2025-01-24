@@ -118,7 +118,7 @@ const App = () => {
             Monad Devnet Faucet
           </h1>
           <p className="text-[#0f1324]/70">
-            Get Monad devnet tokens (TMON) to build on testnet
+            Get Monad devnet tokens ($TMON) to start building!
           </p>
         </div>
 
