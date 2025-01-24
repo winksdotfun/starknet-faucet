@@ -109,6 +109,7 @@ const App = () => {
   }
 
 
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-[#f6f3f1] text-[#0f1324] font-mono">
       <div className="sm:w-[300px] md:w-[500px] px-4">
@@ -187,9 +188,9 @@ const App = () => {
           )}
           {success && (
             <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3 text-center w-full truncate ">
-              {success} <br />
-              {transactionHash}
-            </div>
+              {success} <br /> <a href={`https://explorer.monad-testnet.category.xyz/tx/${transactionHash}`} target='_blank' rel="noopener noreferrer" className=' underline'>View txn</a>
+              {transactionHash ? `${transactionHash.slice(0, 6)}...${transactionHash.slice(-4)}` : ""}
+              </div>
           )}
 
           {/* Request Button */}
