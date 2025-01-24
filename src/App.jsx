@@ -101,10 +101,10 @@ const App = () => {
         setSuccess('Monad Testnet added successfully!')
       } catch (error) {
         console.error('Network add failed:', error)
-        setError(`Error: ${error.message}`)
+        alert(`Error: ${error.message}`)
       }
     } else {
-      alert('MetaMask not installed')
+      setError('MetaMask not installed')
     }
   }
 
