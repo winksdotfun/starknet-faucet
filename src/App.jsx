@@ -190,7 +190,6 @@ const App = () => {
             <div className="mb-2 text-xs text-green-400 bg-green-400/10 rounded-xl p-3 text-center w-full truncate ">
               <div className="">
                 {success} <br /> 
-                {/* <a href={`https://explorer.monad-testnet.category.xyz/tx/${transactionHash}`} target='_blank' rel="noopener noreferrer" className=' underline'>View txn</a> */}
               </div>
               {transactionHash ? `${transactionHash.slice(0, 6)}...${transactionHash.slice(-4)}` : ""}
             </div>
