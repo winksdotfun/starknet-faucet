@@ -110,7 +110,7 @@ const App = () => {
 
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#6e54ff]/10 text-[#0f1324] font-mono">
+    <div className="flex justify-center items-center min-h-screen bg-[#f6f3f1] text-[#0f1324] font-mono">
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
           <h1 className="text-2xl font-bold mb-1 text-[#6e54ff]">
