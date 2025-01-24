@@ -76,8 +76,41 @@ const App = () => {
     }
   };
 
+  const addNetwork = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' })
+
+        const networkParams = {
+          chainId: '0x279f',
+          chainName: 'Monad Testnet',
+          nativeCurrency: {
+            name: 'MON',
+            symbol: 'MON',
+            decimals: 18
+          },
+          rpcUrls: ['https://rpc-testnet.monadinfra.com/rpc/smkuKxR14Php4gxcWPU7ZZk5DEd9xXBU'],
+          blockExplorerUrls: ['https://explorer.monad-testnet.category.xyz']
+        }
+
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [networkParams]
+        })
+
+        setSuccess('Monad Testnet added successfully!')
+      } catch (error) {
+        console.error('Network add failed:', error)
+        setError(`Error: ${error.message}`)
+      }
+    } else {
+      alert('MetaMask not installed')
+    }
+  }
+
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-[#f6f3f1] text-[#0f1324] font-mono">
+    <div className="flex justify-center items-center min-h-screen bg-[#6e54ff]/10 text-[#0f1324] font-mono">
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
           <h1 className="text-2xl font-bold mb-1 text-[#6e54ff]">
@@ -172,7 +205,9 @@ const App = () => {
             {loading ? 'Requesting...' : recentlyRequested ? 'Already Requested' : 'Request Tokens'}
           </button>
 
-          <button className='mt-3 flex justify-center items-center gap-2 border border-[#6e54ff] w-full py-3 rounded-xl font-medium transition-all duration-300 text-[#6e54ff] hover:opacity-90 shadow-lg'>
+          <button
+            onClick={addNetwork}
+            className='mt-3 flex justify-center items-center gap-2 border border-[#6e54ff] w-full py-3 rounded-xl font-medium transition-all duration-300 text-[#6e54ff] hover:opacity-90 shadow-lg'>
             <IoMdAddCircle className=' size-5' />
             Add to metamask
           </button>
