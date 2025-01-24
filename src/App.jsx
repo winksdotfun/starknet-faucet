@@ -115,10 +115,10 @@ const App = () => {
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
           <h1 className="text-2xl font-bold mb-1 text-[#6e54ff]">
-            Monad Faucet
+            Monad Devnet Faucet
           </h1>
           <p className="text-[#0f1324]/70">
-            Get testnet tokens for your monad journey
+            Get Monad devnet tokens (TMON) to build on testnet
           </p>
         </div>
 
@@ -126,7 +126,7 @@ const App = () => {
           {/* Address Input */}
           <div className="mb-2">
             <label className="block text-sm font-medium mb-2 text-[#0f1324]">
-              Monad Address
+              Enter or paste your EVM wallet address
             </label>
             <input
               type="text"
@@ -138,7 +138,7 @@ const App = () => {
                        transition-all duration-300"
             />
             {address && !isValidAddress && (
-              <p className="mt-2 text-sm text-[#6e54ff]">Please enter a valid Monad address</p>
+              <p className="mt-2 text-sm text-[#6e54ff]">Please enter a EVM address</p>
             )}
           </div>
 
@@ -212,7 +212,7 @@ const App = () => {
             onClick={addNetwork}
             className='mt-3 flex justify-center items-center gap-2 border border-[#6e54ff] w-full py-3 rounded-xl font-medium transition-all duration-300 text-[#6e54ff] hover:opacity-90 shadow-lg'>
             <IoMdAddCircle className=' size-5' />
-            Add to metamask
+            Add Monad devnet to metamask
           </button>
         </div>
 
