@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { IoMdAddCircle } from 'react-icons/io';
 
 const App = () => {
   const [address, setAddress] = useState('');
@@ -11,15 +12,15 @@ const App = () => {
   const [transactionHash, setTransactionHash] = useState(null);
   const [recentlyRequested, setRecentlyRequested] = useState(false);
 
-  const validateStarknetAddress = (addr) => {
-    const starknetAddressRegex = /^0x[0-9a-fA-F]{1,64}$/;
-    return starknetAddressRegex.test(addr);
+  const validateMonadAddress = (addr) => {
+    const monadAddressRegex = /^0x[0-9a-fA-F]{40}$/;
+    return monadAddressRegex.test(addr);
   };
 
   const handleAddressChange = (e) => {
     const newAddress = e.target.value;
     setAddress(newAddress);
-    setIsValidAddress(validateStarknetAddress(newAddress));
+    setIsValidAddress(validateMonadAddress(newAddress));
   };
 
   useEffect(() => {
@@ -40,28 +41,28 @@ const App = () => {
     setSuccess(null);
 
     try {
-      const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet', {
-        address,
-        tokenType: selectedToken
+      const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet-monad', {
+        address
+        // tokenType: selectedToken
       });
 
       setSuccess('Tokens sent successfully!');
       setTransactionHash(response.data.transactionHash);
-      setRecentlyRequested(true); 
+      setRecentlyRequested(true);
       console.log('Faucet response:', response.data);
       console.log('Faucet response:', response.data.transactionHash);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.status === 429) {
           setError('You have exceeded the request limit. Please try again later (24 hour cooldown).');
-          setRecentlyRequested(true); 
+          setRecentlyRequested(true);
         }
         else if (error.response?.status === 500) {
           setError('Server error occurred. Please try again later.');
         }
         else if (error.response?.status === 403) {
           setError('You have exceeded the request limit. Please try again later (24 hour cooldown).');
-          setRecentlyRequested(true); 
+          setRecentlyRequested(true);
         }
         else {
           setError(error.response?.data?.message || 'Failed to request tokens');
@@ -79,7 +80,7 @@ const App = () => {
     <div className="flex justify-center items-center min-h-screen bg-[#f6f3f1] text-[#0f1324] font-mono">
       <div className="sm:w-[300px] md:w-[500px] px-4">
         <div className="text-center mb-2">
-          <h1 className="text-2xl font-bold mb-1 bg-clip-text text-transparent bg-gradient-to-r from-[#6e54ff] to-[#fbfaf9]">
+          <h1 className="text-2xl font-bold mb-1 text-[#6e54ff]">
             Monad Faucet
           </h1>
           <p className="text-[#0f1324]/70">
@@ -91,11 +92,11 @@ const App = () => {
           {/* Address Input */}
           <div className="mb-2">
             <label className="block text-sm font-medium mb-2 text-[#0f1324]">
-              Starknet Address
+              Monad Address
             </label>
-            <input 
-              type="text" 
-              placeholder="0x..." 
+            <input
+              type="text"
+              placeholder="0x..."
               value={address}
               onChange={handleAddressChange}
               className="w-full px-4 py-2 text-sm rounded-xl bg-[#f6f3f1] border border-[#000000]/10 
@@ -108,7 +109,7 @@ const App = () => {
           </div>
 
           {/* Token Selection */}
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label className="block text-sm font-medium mb-2 text-[#0f1324]">
               Select Token
             </label>
@@ -143,7 +144,7 @@ const App = () => {
                 : "You can request 0.002 ETH every 24 hours"
               }
             </div>
-          </div>
+          </div> */}
 
           {/* Status Messages */}
           {error && (
@@ -159,16 +160,21 @@ const App = () => {
           )}
 
           {/* Request Button */}
-          <button 
+          <button
             onClick={requestFaucet}
             disabled={!isValidAddress || loading || recentlyRequested}
             className={`w-full py-3 rounded-xl font-medium transition-all duration-300
               ${isValidAddress && !loading && !recentlyRequested
-                ? 'bg-gradient-to-r from-[#6e54ff] to-[#6e54ff]/80 text-[#fbfaf9] hover:opacity-90 shadow-lg' 
+                ? 'bg-gradient-to-r from-[#6e54ff] to-[#6e54ff]/80 text-[#fbfaf9] hover:opacity-90 shadow-lg'
                 : 'bg-[#0f1324]/10 text-[#0f1324]/40 cursor-not-allowed'
               }`}
           >
             {loading ? 'Requesting...' : recentlyRequested ? 'Already Requested' : 'Request Tokens'}
+          </button>
+
+          <button className='mt-3 flex justify-center items-center gap-2 border border-[#6e54ff] w-full py-3 rounded-xl font-medium transition-all duration-300 text-[#6e54ff] hover:opacity-90 shadow-lg'>
+            <IoMdAddCircle className=' size-5' />
+            Add to metamask
           </button>
         </div>
 
