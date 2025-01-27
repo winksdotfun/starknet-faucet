@@ -191,7 +191,7 @@ const App = () => {
               <div className="">
                 {success} <br /> 
               </div>
-              {transactionHash ? `${transactionHash.slice(0, 6)}...${transactionHash.slice(-4)}` : ""}
+              {transactionHash ? <a href={`https://testnet.monadexplorer.com/tx/${transactionHash}`} target="_blank" rel="noopener noreferrer" className="text-[#6e54ff] hover:underline">{`${transactionHash}`}</a> : ""}
             </div>
           )}
 
