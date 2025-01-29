@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { IoMdAddCircle } from 'react-icons/io';
+import { logAnalyticsEvent } from './firebase';
 
 const App = () => {
   const [address, setAddress] = useState('');
@@ -41,6 +42,10 @@ const App = () => {
     setSuccess(null);
 
     try {
+      logAnalyticsEvent('faucet_request_started', {
+        address_length: address.length
+      });
+      
       const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet-monad', {
         address
         // tokenType: selectedToken
@@ -49,11 +54,21 @@ const App = () => {
       setSuccess('Tokens sent successfully!');
       setTransactionHash(response.data.transactionHash);
       setRecentlyRequested(true);
+      
+      logAnalyticsEvent('faucet_request_success', {
+        transaction_hash: response.data.transactionHash
+      });
       console.log('Faucet response:', response.data);
       console.log('Faucet response:', response.data.transactionHash);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 429) {
+        const errorStatus = error.response?.status;
+        logAnalyticsEvent('faucet_request_error', {
+          error_status: errorStatus,
+          error_message: error.response?.data?.message || 'Unknown error'
+        });
+        
+        if (errorStatus === 429) {
           setError('You have exceeded the request limit. Please try again later (24 hour cooldown).');
           setRecentlyRequested(true);
         }
@@ -79,6 +94,7 @@ const App = () => {
   const addNetwork = async () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
+        logAnalyticsEvent('add_network_started');
         await window.ethereum.request({ method: 'eth_requestAccounts' })
 
         const networkParams = {
@@ -99,8 +115,12 @@ const App = () => {
         })
 
         setSuccess('Monad Testnet added successfully!')
+        logAnalyticsEvent('add_network_success');
       } catch (error) {
         console.error('Network add failed:', error)
+        logAnalyticsEvent('add_network_error', {
+          error_message: error.message
+        });
         alert(`Error: ${error.message}`)
       }
     } else {
