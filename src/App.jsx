@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { logAnalyticsEvent } from './firebase';
 
 const App = () => {
   const [address, setAddress] = useState('');
@@ -22,6 +23,13 @@ const App = () => {
     setIsValidAddress(validateStarknetAddress(newAddress));
   };
 
+  const handleTokenSelect = (token) => {
+    logAnalyticsEvent('token_selected', {
+      token_type: token
+    });
+    setSelectedToken(token);
+  };
+
   useEffect(() => {
     if (recentlyRequested) {
       const timer = setTimeout(() => {
@@ -40,11 +48,19 @@ const App = () => {
     setSuccess(null);
 
     try {
+      logAnalyticsEvent('faucet_request_started', {
+        token_type: selectedToken
+      });
+
       const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet', {
       // const response = await axios.post('http://localhost:3001/api/faucet', {
-      
         address,
         tokenType: selectedToken
+      });
+
+      logAnalyticsEvent('faucet_request_success', {
+        token_type: selectedToken,
+        transaction_hash: response.data.transactionHash
       });
 
       setSuccess('Tokens sent successfully!');
@@ -54,7 +70,14 @@ const App = () => {
       console.log('Faucet response:', response.data.transactionHash);
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        if (error.response?.status === 429) {
+        const errorStatus = error.response?.status;
+        logAnalyticsEvent('faucet_request_error', {
+          token_type: selectedToken,
+          error_code: errorStatus,
+          error_message: error.response?.data?.message || 'Unknown error'
+        });
+
+        if (errorStatus === 429) {
           setError('You have exceeded the request limit. Please try again later (24 hour cooldown).');
           setRecentlyRequested(true); 
         }
@@ -116,7 +139,7 @@ const App = () => {
             </label>
             <div className="grid grid-cols-2 gap-4">
               <button 
-                onClick={() => setSelectedToken('STRK')}
+                onClick={() => handleTokenSelect('STRK')}
                 disabled={recentlyRequested}
                 className={`px-4 py-2 text-base rounded-xl transition-all duration-300 
                   ${selectedToken === 'STRK' 
@@ -127,7 +150,7 @@ const App = () => {
                 STRK
               </button>
               <button 
-                onClick={() => setSelectedToken('ETH')}
+                onClick={() => handleTokenSelect('ETH')}
                 disabled={recentlyRequested}
                 className={`px-4 py-2 text-base rounded-xl transition-all duration-300 
                   ${selectedToken === 'ETH' 
