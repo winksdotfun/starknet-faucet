@@ -1,0 +1,73 @@
+
+# 2025-01-29 21:55:56.160799
++yes
+
+# 2025-01-29 21:56:05.073792
++d
+
+# 2025-01-29 21:57:11.351957
++add firebase integration to the project, also add events where relevant and you think its necessary. Also, make sure later on i can find those events by app name, since the same firebase project is used by other apps. const firebaseConfig = {
++  apiKey: "AIzaSyDyzIuow1wVwnysfY2WHGUeBhKBGDXVZuc",
++  authDomain: "ultimate-analytics-9d0be.firebaseapp.com",
++  projectId: "ultimate-analytics-9d0be",
++  storageBucket: "ultimate-analytics-9d0be.firebasestorage.app",
++  messagingSenderId: "108249184507",
++  appId: "1:108249184507:web:d4653164cec30c6fecd85e",
++  measurementId: "G-85NGN7TB3M"
++};
+
+# 2025-01-29 21:58:12.291061
++sub
+
+# 2025-01-29 21:58:28.006410
++/exit
+
+# 2025-01-29 21:59:48.434522
++ add firebase integration to the project, also add events where relevant and yo
++u think its necessary. Also, make sure later on i can find those events by app n
++ame, since the same firebase project is used by other apps. const firebaseConfig
++ = { 
++  apiKey: "AIzaSyDyzIuow1wVwnysfY2WHGUeBhKBGDXVZuc", 
++  authDomain: "ultimate-analytics-9d0be.firebaseapp.com", 
++  projectId: "ultimate-analytics-9d0be", 
++  storageBucket: "ultimate-analytics-9d0be.firebasestorage.app", 
++  messagingSenderId: "108249184507", 
++  appId: "1:108249184507:web:d4653164cec30c6fecd85e", 
++  measurementId: "G-85NGN7TB3M" 
++};      
+
+# 2025-01-29 22:00:04.737451
++all
+
+# 2025-01-29 22:00:30.649365
++yes
+
+# 2025-01-29 22:00:39.499943
++/run npm install firebase@^11.2.0
+
+# 2025-01-29 22:00:39.500094
++/run npm install firebase@^11.2.0
+
+# 2025-01-29 22:00:46.590157
++yes
+
+# 2025-01-29 22:01:27.758300
++on npm run build project fails with errors 
+
+# 2025-01-29 22:03:35.402130
++switched branches, do the same for this branch, however, name the app MonadFaucet
+
+# 2025-01-29 22:04:14.058929
++yes
+
+# 2025-01-29 22:04:24.941498
++/run npm install firebase@^11.2.0
+
+# 2025-01-29 22:04:24.941882
++/run npm install firebase@^11.2.0
+
+# 2025-01-29 22:05:03.266205
++D
+
+# 2025-01-29 22:05:21.774025
++so firebase and events are added? 
