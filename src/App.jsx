@@ -43,7 +43,9 @@ const App = () => {
 
     try {
       logAnalyticsEvent('faucet_request_started', {
-        address_length: address.length
+        address_length: address.length,
+        source: 'ai_interaction',
+        interaction_type: 'faucet_request'
       });
       
       const response = await axios.post('https://faucet-backend-oq96p.ondigitalocean.app/api/faucet-monad', {
@@ -56,7 +58,9 @@ const App = () => {
       setRecentlyRequested(true);
       
       logAnalyticsEvent('faucet_request_success', {
-        transaction_hash: response.data.transactionHash
+        transaction_hash: response.data.transactionHash,
+        source: 'ai_interaction',
+        interaction_type: 'faucet_request'
       });
       console.log('Faucet response:', response.data);
       console.log('Faucet response:', response.data.transactionHash);
@@ -65,7 +69,9 @@ const App = () => {
         const errorStatus = error.response?.status;
         logAnalyticsEvent('faucet_request_error', {
           error_status: errorStatus,
-          error_message: error.response?.data?.message || 'Unknown error'
+          error_message: error.response?.data?.message || 'Unknown error',
+          source: 'ai_interaction',
+          interaction_type: 'faucet_request'
         });
         
         if (errorStatus === 429) {
@@ -94,7 +100,10 @@ const App = () => {
   const addNetwork = async () => {
     if (typeof window.ethereum !== 'undefined') {
       try {
-        logAnalyticsEvent('add_network_started');
+        logAnalyticsEvent('add_network_started', {
+          source: 'ai_interaction',
+          interaction_type: 'network_add'
+        });
         await window.ethereum.request({ method: 'eth_requestAccounts' })
 
         const networkParams = {
@@ -115,11 +124,16 @@ const App = () => {
         })
 
         setSuccess('Monad Testnet added successfully!')
-        logAnalyticsEvent('add_network_success');
+        logAnalyticsEvent('add_network_success', {
+          source: 'ai_interaction',
+          interaction_type: 'network_add'
+        });
       } catch (error) {
         console.error('Network add failed:', error)
         logAnalyticsEvent('add_network_error', {
-          error_message: error.message
+          error_message: error.message,
+          source: 'ai_interaction',
+          interaction_type: 'network_add'
         });
         alert(`Error: ${error.message}`)
       }
