@@ -33,3 +33,4 @@ dist-ssr
 .aider*
 .aider.chat.history.md
 .aider.tags.cache.v3/
+.aider.chat.history.md.*
