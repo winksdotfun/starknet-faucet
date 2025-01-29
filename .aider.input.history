@@ -115,3 +115,114 @@
 
 # 2025-01-29 22:09:01.388535
 +yes
+
+# 2025-01-29 22:10:04.834472
++again cant commit, it got rejected remote: error: GH013: Repository rule violations found for refs/heads/monad.
++remote: 
++remote: - GITHUB PUSH PROTECTION
++remote:   —————————————————————————————————————————
++remote:     Resolve the following violations before pushing again
++remote: 
++remote:     - Push cannot contain secrets
++remote: 
++remote:     
++remote:      (?) Learn how to resolve a blocked push
++remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
++remote:     
++remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
++remote:      Visit the repository settings page, https://github.com/winksdotfun/starknet-faucet/settings/security_analysis
++remote:     
++remote:     
++remote:       —— Anthropic API Key —————————————————————————————————
++remote:        locations:
++remote:          - commit: 76fd5a58460e94fc831a2f327b9c403fb0fe206a
++remote:            path: .aider.chat.history.md:43
++remote:          - commit: 5b9422f3c9112fb3d0acff1ad03f798637f498c0
++remote:            path: .aider.chat.history.md:43
++remote:     
++remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
++remote:        https://github.com/winksdotfun/starknet-faucet/security/secret-scanning/unblock-secret/2sJOlNuqY6kVmy4fZEGhp2vLHP5
++remote:     
++remote: 
++remote: 
++To github.com:winksdotfun/starknet-faucet.git
++ ! [remote rejected] monad -> monad (push declined due to repository rule violations)
++error: failed to push some refs to 'github.com:winksdotfun/starknet-faucet.git'
+
+# 2025-01-29 22:10:22.856054
++yes
+
+# 2025-01-29 22:10:27.662925
++/run git add src/firebase.js .env.example
+
+# 2025-01-29 22:10:27.663044
++/run git add src/firebase.js .env.example
+
+# 2025-01-29 22:10:28.134531
++/run git commit -m "refactor: Move Firebase config to environment variables"
+
+# 2025-01-29 22:10:28.134619
++/run git commit -m "refactor: Move Firebase config to environment variables"
+
+# 2025-01-29 22:11:21.616125
++still cant push remote: error: GH013: Repository rule violations found for refs/heads/monad.
++remote: 
++remote: - GITHUB PUSH PROTECTION
++remote:   —————————————————————————————————————————
++remote:     Resolve the following violations before pushing again
++remote: 
++remote:     - Push cannot contain secrets
++remote: 
++remote:     
++remote:      (?) Learn how to resolve a blocked push
++remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
++remote:     
++remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
++remote:      Visit the repository settings page, https://github.com/winksdotfun/starknet-faucet/settings/security_analysis
++remote:     
++remote:     
++remote:       —— Anthropic API Key —————————————————————————————————
++remote:        locations:
++remote:          - commit: 76fd5a58460e94fc831a2f327b9c403fb0fe206a
++remote:            path: .aider.chat.history.md:43
++remote:          - commit: 5b9422f3c9112fb3d0acff1ad03f798637f498c0
++remote:            path: .aider.chat.history.md:43
++remote:     
++remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
++remote:        https://github.com/winksdotfun/starknet-faucet/security/secret-scanning/unblock-secret/2sJOlNuqY6kVmy4fZEGhp2vLHP5
++remote:     
++remote: 
++remote: 
++To github.com:winksdotfun/starknet-faucet.git
++ ! [remote rejected] monad -> monad (push declined due to repository rule violations)
++error: failed to push some refs to 'github.com:winksdotfun/starknet-faucet.git'
+
+# 2025-01-29 22:11:34.778084
++yes
+
+# 2025-01-29 22:12:01.234726
++/run git add .aider.chat.history.md
+
+# 2025-01-29 22:12:01.235473
++/run git add .aider.chat.history.md
+
+# 2025-01-29 22:12:01.709108
++/run git commit -m "chore: Clean up aider chat history file"
+
+# 2025-01-29 22:12:01.709193
++/run git commit -m "chore: Clean up aider chat history file"
+
+# 2025-01-29 22:12:02.169808
++/run git filter-branch --force --index-filter "git rm --cached --ignore-unmatch .aider.chat.history.md" --prune-empty --tag-name-filter cat -- --all
+
+# 2025-01-29 22:12:02.169889
++/run git filter-branch --force --index-filter "git rm --cached --ignore-unmatch .aider.chat.history.md" --prune-empty --tag-name-filter cat -- --all
+
+# 2025-01-29 22:12:12.712815
++/run git push -f origin monad
+
+# 2025-01-29 22:12:12.712890
++/run git push -f origin monad
+
+# 2025-01-29 22:12:40.023634
++why aider files are there in first place? they should not be commited to github, make the ignored
