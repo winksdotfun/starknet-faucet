@@ -2,23 +2,43 @@ import { initializeApp } from 'firebase/app';
 import { getAnalytics, logEvent } from 'firebase/analytics';
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+  apiKey: "AIzaSyDyzIuow1wVwnysfY2WHGUeBhKBGDXVZuc",
+  authDomain: "ultimate-analytics-9d0be.firebaseapp.com",
+  projectId: "ultimate-analytics-9d0be",
+  storageBucket: "ultimate-analytics-9d0be.firebasestorage.app",
+  messagingSenderId: "108249184507",
+  appId: "1:108249184507:web:d4653164cec30c6fecd85e",
+  measurementId: "G-85NGN7TB3M"
 };
 
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+let analytics = null;
+let app = null;
+
+// Initialize Firebase when the DOM is ready
+if (typeof document !== 'undefined') {
+  document.addEventListener('DOMContentLoaded', () => {
+    try {
+      app = initializeApp(firebaseConfig);
+      analytics = getAnalytics(app);
+    } catch (error) {
+      console.error('Firebase initialization error:', error);
+    }
+  });
+}
 
 export const logAnalyticsEvent = (eventName, params = {}) => {
-  // Add app identifier to all events
-  const enrichedParams = {
-    ...params,
-    app_name: 'MonadFaucet'
-  };
-  logEvent(analytics, eventName, enrichedParams);
+  if (!analytics) {
+    console.warn('Analytics not initialized yet');
+    return;
+  }
+
+  try {
+    const enrichedParams = {
+      ...params,
+      app_name: 'MonadFaucet'
+    };
+    logEvent(analytics, eventName, enrichedParams);
+  } catch (error) {
+    console.error('Failed to log analytics event:', error);
+  }
 };
