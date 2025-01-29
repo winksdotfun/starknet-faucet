@@ -71,3 +71,47 @@
 
 # 2025-01-29 22:05:21.774025
 +so firebase and events are added? 
+
+# 2025-01-29 22:07:20.910767
++cant push the code, did you add logs for AI? 
+
+# 2025-01-29 22:07:59.557602
++no i meant not that, remove ai mentions, it should look like i wrote the code. 
+
+# 2025-01-29 22:08:21.787168
++also cant push to git remote: Resolving deltas: 100% (6/6), completed with 4 local objects.
++remote: error: GH013: Repository rule violations found for refs/heads/monad.
++remote: 
++remote: - GITHUB PUSH PROTECTION
++remote:   —————————————————————————————————————————
++remote:     Resolve the following violations before pushing again
++remote: 
++remote:     - Push cannot contain secrets
++remote: 
++remote:     
++remote:      (?) Learn how to resolve a blocked push
++remote:      https://docs.github.com/code-security/secret-scanning/working-with-secret-scanning-and-push-protection/working-with-push-protection-from-the-command-line#resolving-a-blocked-push
++remote:     
++remote:      (?) This repository does not have Secret Scanning enabled, but is eligible. Enable Secret Scanning to view and manage detected secrets.
++remote:      Visit the repository settings page, https://github.com/winksdotfun/starknet-faucet/settings/security_analysis
++remote:     
++remote:     
++remote:       —— Anthropic API Key —————————————————————————————————
++remote:        locations:
++remote:          - commit: 5b9422f3c9112fb3d0acff1ad03f798637f498c0
++remote:            path: .aider.chat.history.md:43
++remote:     
++remote:        (?) To push, remove secret from commit(s) or follow this URL to allow the secret.
++remote:        https://github.com/winksdotfun/starknet-faucet/security/secret-scanning/unblock-secret/2sJOlNuqY6kVmy4fZEGhp2vLHP5
++remote:     
++remote: 
++remote: 
++To github.com:winksdotfun/starknet-faucet.git
++ ! [remote rejected] monad -> monad (push declined due to repository rule violations)
++error: failed to push some refs to 'github.com:winksdotfun/starknet-faucet.git
+
+# 2025-01-29 22:08:28.042865
++no
+
+# 2025-01-29 22:09:01.388535
++yes
