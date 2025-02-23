@@ -105,7 +105,7 @@ const App = () => {
             symbol: 'MON',
             decimals: 18
           },
-          rpcUrls: ['https://rpc-testnet.monadinfra.com/rpc/smkuKxR14Php4gxcWPU7ZZk5DEd9xXBU'],
+          rpcUrls: ['https://testnet-rpc2.monad.xyz/52227f026fa8fac9e2014c58fbf5643369b3bfc6'],
           blockExplorerUrls: ['https://explorer.monad-testnet.category.xyz']
         }
 
